@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mole Wars</title>
+
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+
+    <!-------------OVERLAY DA TROCA DE TECLA---------------->
+    <main id="loadingPage">
+        <div id="loading-div">
+            <span id="loading-text">LOADING</span>
+        </div>
+    </main>
+
+    <!--------------01 TELA DE TÍTULO---------------------->
+    <main id="title-screen">
+        <h1>MOLE WARS</h1>
+
+        <!--Area pra digitar o nome-->
+        <div class="name-input-container">
+            <span class="name-input-label">NOME:</span>
+            <input id="userName" class="name-input" maxlength="12" type="text" placeholder="Digite seu usuário:" />
+            <span id="error-menssage"></span>
+        </div>
+        <button class="major-button" type="submit" onclick="selectPage(1,''), doLogin() ">INICIAR</button>
+        <!-- onclick="doLogin(userName.valor) -->
+        <!--Botões de Rodapé-->
+        <footer class="title-screen-footer">
+            <div>
+                <button class="minor-button" onclick="showOrHideOverlay('settings-overlay', true)"><img
+                        src="./images/settings.svg" alt="Settings Button" /></button>
+                <span>Configurações</span>
+            </div>
+
+            <div>
+                <button class="minor-button" onclick="showOrHideOverlay('ranking-overlay', true)"><img
+                        src="./images/podium.svg" alt="Ranking Button" /></button>
+                <span>Ranking</span>
+            </div>
+        </footer>
+    </main>
+
+    <!--OVERLAY DE CONFIGURAÇÕES-->
+    <main id="settings-overlay">
+        <div class="settings-screen">
+            <div class="settings-container">
+                <h2>Configurações</h2>
+
+                <div id="sound-container">
+                    <div class="volume-group">
+                        <span>Música</span>
+                        <input type="range" min="0" max="100" oninput="">
+                        <div class=""></div>
+                    </div>
+
+                    <div class="volume-group">
+                        <span>Efeitos Sonoros</span>
+                        <input type="range" min="0" max="100" oninput="">
+                    </div>
+                </div>
+
+                <div class="controls-group">
+                    <span>Controles</span>
+
+                    <div id="control-config-area">
+                        <div id="keyboard-area">
+                            <div class="keyboard-line-config">
+                                <input class="key-blue" id="left-top-key-7" value="7"></input>
+                                <input class="key-yellow" id="top-key-8" value="8"></input>
+                                <input class="key-blue" id="right-top-key-9" value="9"></input>
+                            </div>
+                            <div class="keyboard-line-config">
+                                <input class="key-yellow" id="left-bottom-key-4" value="4"></input>
+                                <input class="key-blue" id="center-key-5" value="5"></input>
+                                <input class="key-yellow" id="right-center-key-6" value="6"></input>
+                            </div>
+                            <div class="keyboard-line-config">
+                                <input class="key-blue" id="left-bottom-key-1" value="1"></input>
+                                <input class="key-yellow" id="bottom-key-2" value="2"></input>
+                                <input class="key-blue" id="right-bottom-key-3" value="3"></input>
+                            </div>;
+                        </div>
+
+                        <img id="mouseIconImage" src="./images/mouse-icon.svg" alt="Mouse">
+                    </div>
+                </div>
+
+                <footer>
+                    <img class="arrow-button" src="./images/seta.svg" alt="Return Button"
+                        onclick="showOrHideOverlay('settings-overlay', false)">
+                </footer>
+            </div>
+        </div>
+    </main>
+
+
+<!--OVERLAY DO RANKING-->
+    <main id="ranking-overlay">
+        <div id="ranking-container">
+            <h3 class="ranking-header">TOP 10</h3>
+            <div id="positions">
+
+            </div>
+        </div>
+    </main>
+
+
+    <!--------------02 TELA DO MAPA---------------------------->
+    <main id="map">
+        <div id="map-title"><span>SELECIONE A FASE</span></div>
+        <div id="map-area-fases">
+            <div class="map-area-fases-sub">
+                <div class="map-area-itens-select">1-1</div>
+                <div class="map-area-itens-select">1-2</div>
+                <div class="map-area-itens-select">1-3</div>
+                <div class="map-area-itens-select">1-4</div>
+                <div class="map-area-itens-select">1-5</div>
+                <div class="map-area-itens-select">
+                    <img id="arrow-button-map" src="./images/seta.svg" alt="Return Button" onclick="selectPage(0,'')">
+                    </div>
+            </div>
+            <div class="map-area-fases-sub">
+                <div class="map-area-itens-select">2-1</div>
+                <div class="map-area-itens-select">2-2</div>
+                <div class="map-area-itens-select">2-3</div>
+                <div class="map-area-itens-select">2-4</div>
+                <div class="map-area-itens-select"><img class="map-fase-icon" id="fase-dagobah"
+                        onclick="selectStage(2,this.id)" src="./images/fase-dagobah.png" onclick="placeChange(1)"/></div>
+                <div class="map-area-itens-select">2-6</div>
+            </div>
+            <div class="map-area-fases-sub">
+                <div class="map-area-itens-select">3-1</div>
+                <div class="map-area-itens-select">3-2</div>
+                <div class="map-area-itens-select">3-3</div>
+                <div class="map-area-itens-select">3-4</div>
+                <div class="map-area-itens-select">3-5</div>
+                <div class="map-area-itens-select">3-6</div>
+            </div>
+            <div class="map-area-fases-sub">
+                <div class="map-area-itens-select">4-1</div>
+                <div class="map-area-itens-select">
+                    <img class="map-fase-icon" onclick="selectStage(2,this.id)" onclick="placeChange(1)"id="fase-tatooine"
+                        src="./images/fase-tatooine.png" />
+                </div>
+                <div class="map-area-itens-select">4-3</div>
+                <div class="map-area-itens-select">4-4</div>
+                <div class="map-area-itens-select">4-5</div>
+                <div class="map-area-itens-select">4-6</div>
+            </div>
+            <div class="map-area-fases-sub">
+                <div class="map-area-itens-select">5-1</div>
+                <div class="map-area-itens-select">5-2</div>
+                <div class="map-area-itens-select">5-3</div>
+                <div class="map-area-itens-select">5-4</div>
+                <div class="map-area-itens-select">5-5</div>
+                <div class="map-area-itens-select">5-6</div>
+            </div>
+            <div class="map-area-fases-sub">
+                <div class="map-area-itens-select">6-1</div>
+                <div class="map-area-itens-select">6-2</div>
+                <div class="map-area-itens-select">6-3</div>
+                <div class="map-area-itens-select">6-4</div>
+                <div class="map-area-itens-select">6-5</div>
+                <div class="map-area-itens-select">6-6</div>
+            </div>
+            <div class="map-area-fases-sub">
+                <div class="map-area-itens-select">7-1</div>
+                <div class="map-area-itens-select">7-2</div>
+                <div class="map-area-itens-select">7-3</div>
+                <div class="map-area-itens-select">
+                    <img class="map-fase-icon" onclick="selectStage(2,this.id)" id="fase-hoth"
+                    onclick="placeChange(2)" src="./images/fase-hoth.png " />
+                </div>
+                <div class="map-area-itens-select">7-5</div>
+                <div class="map-area-itens-select">7-6</div>
+            </div>
+            <div class="map-area-fases-sub">
+                <div class="map-area-itens-select">8-1</div>
+                <div class="map-area-itens-select"><img class="map-fase-icon" onclick="selectStage(2,this.id)"
+                        id="fase-deathstar" src="./images/fase-death-star.png" /></div>
+                <div class="map-area-itens-select">8-3</div>
+                <div class="map-area-itens-select">8-4</div>
+                <div class="map-area-itens-select">8-5</div>
+                <div class="map-area-itens-select">8-6</div>
+            </div>
+            <div class="map-area-fases-sub">
+                <div class="map-area-itens-select">9-1</div>
+                <div class="map-area-itens-select">9-2</div>
+                <div class="map-area-itens-select">9-3</div>
+                <div class="map-area-itens-select">9-4</div>
+                <div class="map-area-itens-select">9-5</div>
+                <div class="map-area-itens-select">9-6</div>
+            </div>
+            <div class="map-area-fases-sub">
+                <div class="map-area-itens-select">10-1</div>
+                <div class="map-area-itens-select">10-2</div>
+                <div class="map-area-itens-select">10-3</div>
+                <div class="map-area-itens-select">10-4</div>
+                <div class="map-area-itens-select">10-5</div>
+                <div class="map-area-itens-select">10-6</div>
+            </div>
+        </div>
+
+        <!--Botões de Rodapé-->
+        <footer id="testeDeButao" class="title-screen-footer">
+            <div>
+                <button class="minor-button" onclick="showOrHideOverlay('settings-overlay', true)">
+                    <img src="./images/settings.svg" alt="Settings Button" />
+                </button>
+                <span>Configurações</span>
+            </div>
+        </footer>
+
+    </main>
+
+    <!--------------03 TELA DE DIFICULDADE------------------->
+    <main id="difficult">
+        <!--Header-->
+        <div id="information_game">
+            <p> FASE 1</p>
+            <h3 id="stage-name">Planeta Dagobah</h3>
+        </div>
+        <!--Seletor de Dficuldades-->
+        <div id="levels_game">
+            <div id="level_easy">
+                <img onclick="selectDificult(100)" src="./images/capacete_whiteincut.png" />
+                <p>FÁCIL</p>
+            </div>
+
+            <div id="level_hard">
+                <img onclick="selectDificult(300)" src="./images/capacete_blackcut.png" />
+                <p>DIFÍCIL</p>
+            </div>
+
+            <div id="level_normal">
+                <img onclick="selectDificult(200)" src="./images/capacete_mandaloriancut.png" />
+                <p>MÉDIO</p>
+            </div>
+        </div>
+
+        <!--Rodapé-->
+        <div id="instruction_game">
+            <img id="back_arrow" onclick="selectPage(1, '')" src="./images/seta.svg" />
+
+            <div id="loading_game">
+                <div id="loading">
+                    <div id="loading_percentage"></div>
+                </div>
+            </div>
+
+            <div id="loading_icon">
+                <img src="./images/falcon.png" />
+            </div>
+        </div>
+    </main>
+
+    <!--------------TELA DE FASE-------------------------->
+    <main id="body_game">
+        <header>
+            <div id="level">
+                <span id="name_level">FASE</span>
+                <span id="number_level">1</span>
+            </div>
+            <div id="time">
+                <span id="name_number">TIME</span>
+                <span id="time_number">60</span>
+            </div>
+            <div id="punctuation">
+                <img src="./images/pontuacao.png" />
+                <div id="punctuation_number">---</div>
+            </div>
+            <img id="icon_pause" onclick="pauseGame()" src="./images/pause.svg">
+        </header>
+        <div id="result_screen">
+        </div>
+        <div id="map-area-fases-game"></div>
+        <!--
+        <div id="map-area-fases-game">
+            <div class="map-area-fases-sub">
+                <div class="map-area-itens">1-1</div>
+                <div class="map-area-itens">1-2</div>
+                <div class="map-area-itens">1-3</div>
+                <div class="map-area-itens">1-4</div>
+                <div id="quadrant_7" class="map-area-itens map-area-itens-quadant"></div>
+                <div class="map-area-itens">1-4</div>
+                <div class="map-area-itens">1-7</div>
+                <div class="map-area-itens">1-8</div>
+                <div class="map-area-itens">1-9</div>
+                <div class="map-area-itens">1-10</div>
+            </div>
+            <div class="map-area-fases-sub">
+                <div class="map-area-itens">2-1</div>
+                <div class="map-area-itens">2-2</div>
+                <div class="map-area-itens">2-3</div>
+                <div class="map-area-itens">2-4</div>
+                <div class="map-area-itens">2-5</div>
+                <div class="map-area-itens">2-6</div>
+                <div id="quadrant_4" class="map-area-itens map-area-itens-quadant"></div>
+                <div class="map-area-itens">2-8</div>
+                <div class="map-area-itens">2-9</div>
+                <div class="map-area-itens">2-10</div>
+            </div>
+            <div class="map-area-fases-sub">
+                <div class="map-area-itens">3-1</div>
+                <div class="map-area-itens">3-2</div>
+                <div class="map-area-itens">3-3</div>
+                <div class="map-area-itens">3-4</div>
+                <div class="map-area-itens">3-5</div>
+                <div class="map-area-itens">3-6</div>
+                <div class="map-area-itens">3-7</div>
+                <div class="map-area-itens">3-8</div>
+                <div id="quadrant_1" class="map-area-itens map-area-itens-quadant"></div>
+                <div class="map-area-itens">3-10</div>
+            </div>
+            <div class="map-area-fases-sub">
+                <div class="map-area-itens">4-1</div>
+                <div class="map-area-itens">4-2</div>
+                <div class="map-area-itens">4-3</div>
+                <div class="map-area-itens">4-4</div>
+                <div class="map-area-itens">4-5</div>
+                <div class="map-area-itens">4-6</div>
+                <div class="map-area-itens">4-7</div>
+                <div class="map-area-itens">4-8</div>
+                <div class="map-area-itens">4-9</div>
+                <div class="map-area-itens">4-10</div>
+            </div>
+            <div class="map-area-fases-sub">
+                <div class="map-area-itens">5-1</div>
+                <div class="map-area-itens">5-2</div>
+                <div class="map-area-itens">5-3</div>
+                <div class="map-area-itens">5-4</div>
+                <div class="map-area-itens">5-5</div>
+                <div class="map-area-itens">5-6</div>
+                <div id="quadrant_5" class="map-area-itens map-area-itens-quadant"></div>
+                <div class="map-area-itens">5-8</div>
+                <div class="map-area-itens">5-9</div>
+                <div class="map-area-itens">5-10</div>
+            </div>
+            <div class="map-area-fases-sub">
+                <div class="map-area-itens">6-1</div>
+                <div class="map-area-itens">6-2</div>
+                <div class="map-area-itens">6-3</div>
+                <div class="map-area-itens">6-4</div>
+                <div class="map-area-itens">6-5</div>
+                <div id="quadrant_8" class="map-area-itens map-area-itens-quadant"></div>
+                <div class="map-area-itens">6-7</div>
+                <div class="map-area-itens">6-8</div>
+                <div id="quadrant_2" class="map-area-itens"></div>
+                <div class="map-area-itens">6-10</div>
+            </div>
+            <div class="map-area-fases-sub">
+                <div class="map-area-itens">7-1</div>
+                <div class="map-area-itens">7-2</div>
+                <div class="map-area-itens">7-3</div>
+                <div class="map-area-itens">7-4</div>
+                <div class="map-area-itens">7-5</div>
+                <div class="map-area-itens">7-6</div>
+                <div class="map-area-itens">7-7</div>
+                <div class="map-area-itens">7-8</div>
+                <div class="map-area-itens">7-9</div>
+                <div class="map-area-itens">7-10</div>
+            </div>
+            <div class="map-area-fases-sub">
+                <div class="map-area-itens">8-1</div>
+                <div class="map-area-itens">8-2</div>
+                <div class="map-area-itens">8-3</div>
+                <div class="map-area-itens">8-4</div>
+                <div class="map-area-itens">8-5</div>
+                <div class="map-area-itens">8-6</div>
+                <div class="map-area-itens">8-7</div>
+                <div class="map-area-itens">8-8</div>
+                <div class="map-area-itens">8-9</div>
+                <div class="map-area-itens">8-10</div>
+            </div>
+            <div class="map-area-fases-sub">
+                <div class="map-area-itens">9-1</div>
+                <div class="map-area-itens">9-2</div>
+                <div class="map-area-itens">9-3</div>
+                <div class="map-area-itens">9-4</div>
+                <div class="map-area-itens">9-5</div>
+                <div class="map-area-itens">9-6</div>
+                <div id="quadrant_6" class="map-area-itens map-area-itens-quadant"></div>
+                <div class="map-area-itens">9-8</div>
+                <div id="quadrant_3" class="map-area-itens map-area-itens-quadant"></div>
+                <div class="map-area-itens">9-10</div>
+            </div>
+            <div class="map-area-fases-sub">
+                <div class="map-area-itens">10-1</div>
+                <div class="map-area-itens">10-2</div>
+                <div class="map-area-itens">10-3</div>
+                <div class="map-area-itens">10-4</div>
+                <div class="map-area-itens">10-5</div>
+                <div id="quadrant_9" class="map-area-itens map-area-itens-quadant"></div>
+                <div class="map-area-itens">10-7</div>
+                <div class="map-area-itens">10-8</div>
+                <div class="map-area-itens">10-9</div>
+                <div class="map-area-itens">10-10</div>
+            </div>
+            
+        </div>
+    -->
+
+
+    </main>
+
+    <!-- Fazer tela para resultado -->
+    <script src="./js/tela-4-game.js"></script>
+    <script src="./js/script.js"></script>
+    <!-- <script src="./js/game-script.js"></script> -->
+</body>
+
+</html>
